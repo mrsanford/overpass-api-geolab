@@ -1,0 +1,32 @@
+1.
+brew install osmium-tool or
+sudo apt update
+sudo apt install osmium-tool
+
+2.
+wget https://download.geofabrik.de/europe/monaco-latest.osm.pbf -O monaco.osm.pbf
+or curl -L https://download.geofabrik.de/europe/monaco-latest.osm.pbf -o monaco.osm.pbf
+then check: ls -lh monaco.osm.pbf
+
+3. osmium cat monaco.osm.pbf -o monaco.osm
+bzip2 -9f monaco.osm
+
+4. 
+docker build -t overpass-native .
+docker compose up -d
+docker compose logs -f overpass
+
+
+5. test the server
+http://localhost:12347/api/interpreter
+and run a query:
+[out:json];
+node(around:1000,37.2707,-76.7075);
+out;
+
+6. updating later
+docker compose down
+docker compose up -d --force-recreate
+
+
+https://gist.github.com/hiteshsondhi88/bed2fdc871e6f97457057df0d9cce58e
