@@ -6,11 +6,11 @@ services:
       - "12345:80"
     environment:
       - OVERPASS_META=no
-      - OVERPASS_MODE: "init"
-      - OVERPASS_PLANET_URL: "/data/monaco.osm.bz2"
-    OVERPASS_USE_AREAS: "0"
-    OVERPASS_RULES_LOAD: "1"
-    OVERPASS_ALLOW_DUPLICATE_QUERIES: "no"
+      - OVERPASS_MODE=init
+      - OVERPASS_PLANET_URL=/data/monaco.osm.bz2
+      - OVERPASS_USE_AREAS=0
+      - OVERPASS_RULES_LOAD=1
+      - OVERPASS_ALLOW_DUPLICATE_QUERIES=no
     volumes:
       - ./overpass-db:/db
       - ./data:/data
