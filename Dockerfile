@@ -88,6 +88,8 @@ RUN addgroup overpass && adduser --home /db --disabled-password --gecos overpass
 RUN mkdir /nginx /docker-entrypoint-initdb.d && chown nginx:nginx /nginx && chown -R overpass:overpass /db
 
 COPY etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Fix broken supervisor config
+RUN sed -i '/allow-duplicate-queries/d' /etc/supervisor/conf.d/supervisord.conf
 
 COPY etc/nginx-overpass.conf.template /etc/nginx/nginx.conf.template
 
@@ -106,3 +108,4 @@ EXPOSE 80
 HEALTHCHECK --start-period=48h CMD /app/docker-healthcheck.sh
 
 CMD ["/app/docker-entrypoint.sh"]
+
